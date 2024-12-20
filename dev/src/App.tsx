@@ -1,5 +1,5 @@
 import './App.css'
-import Module from '../public/leaf.js';
+import  { Module } from '../public/leaf.js';
 import { useEffect, useRef } from 'react';
 
 function App() {

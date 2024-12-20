@@ -41,7 +41,7 @@ def build_cpp_files(path):
         js_output_file = os.path.join(f"{path}/bin", "leaf.js")
         command_2 = [
             "emcc",
-                      "-lembind",
+            "-lembind",
             "-sUSE_SDL=2",
             "-O2",
             *object_files,  # Expand the list of .o files

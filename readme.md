@@ -72,6 +72,7 @@ const ParentCube = () => {
       address=?
       returnType=?
     >
+    <Cube width=""></Cube>
       /* The provider controls mutliple people controlling cubes at the same time, say multiplayer. */
     </Provider>
   )
