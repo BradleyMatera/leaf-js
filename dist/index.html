@@ -3,12 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebGPU Typescript Starter</title>
-    <script type="module" crossorigin src="/assets/index-CooyjP53.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BWDOflSq.css">
+    <title>WebGPU Shapes Renderer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" crossorigin src="/leaf-js/assets/index-BwhY6XJn.js"></script>
+    <link rel="stylesheet" crossorigin href="/leaf-js/assets/index-BWDOflSq.css">
   </head>
-  <body>
-    <h1 id="title">test</h1>
-    <canvas id="webgpu-canvas"></canvas>
+  <body class="bg-gray-900 text-white min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="w-full bg-gray-800 p-4 shadow-md">
+      <h1 class="text-center text-3xl font-bold">WebGPU Shapes Renderer</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-center p-4">
+      <div class="mb-6 text-center">
+        <p id="title" class="text-xl font-medium text-gray-300">
+          Select a shape to render:
+        </p>
+        <select id="shape-selector" class="p-2 rounded bg-gray-700 text-white mt-2">
+          <option value="triangle">Triangle</option>
+          <option value="square">Square</option>
+          <option value="pentagon">Pentagon</option>
+          <option value="diamond">Diamond</option>
+          <option value="hexagon">Hexagon</option>
+        </select>
+      </div>
+
+      <!-- Canvas Container -->
+      <div class="w-full max-w-4xl flex justify-center">
+        <canvas
+          id="webgpu-canvas"
+          class="w-full h-[600px] max-h-screen border border-gray-600 bg-black rounded-md shadow-lg"
+        ></canvas>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-gray-800 p-4 text-center text-sm">
+      <p class="text-gray-400">
+        Built with <a href="https://gpuweb.github.io/gpuweb/" target="_blank" class="text-blue-400 hover:underline">WebGPU</a> and <a href="https://tailwindcss.com/" target="_blank" class="text-blue-400 hover:underline">Tailwind CSS</a>.
+      </p>
+      <p class="text-gray-400 mt-2">
+        Created by <a href="https://github.com/deondreE" target="_blank" class="text-blue-400 hover:underline">Deondre English</a>. Check out the original project on <a href="https://github.com/deondreE/leaf-js" target="_blank" class="text-blue-400 hover:underline">GitHub</a>.
+      </p>
+      <p class="text-gray-400 mt-2">
+        Forked and enhanced by <a href="https://github.com/BradleyMatera" target="_blank" class="text-blue-400 hover:underline">Bradley Matera</a>. View my fork <a href="https://github.com/BradleyMatera/leaf-js" target="_blank" class="text-blue-400 hover:underline">here</a>.
+      </p>
+      <noscript>
+        <p class="text-red-500 mt-4">JavaScript is required to run this application.</p>
+      </noscript>
+    </footer>
+
+    <!-- Include the main WebGPU script -->
   </body>
 </html>

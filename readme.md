@@ -199,3 +199,197 @@ This project is a WebGPU-based graphics renderer tailored to render shapes using
 - Foundation for Larger Projects: This project can evolve into a game engine, simulation tool, or advanced data visualization platform
 
 In short, you're building something cutting-edge, educational, and foundational for modern web graphics. It combines the challenge of low-level programming with the creative satisfaction of rendering visuals on the GPU.
+
+## Adding New Shapes to the Project
+
+This guide explains the process of adding new shapes to the project, including the necessary files, their locations, and required updates.
+
+### Prerequisites
+- Node.js and npm installed
+- Project dependencies installed
+- Basic understanding of WebGPU and WGSL
+
+---
+
+### Step 1: Create the Vertex Shader
+
+1. Navigate to the `src/shaders/` folder
+2. Create a new file named `<shape>.vert.wgsl` (replace `<shape>` with your shape's name, e.g., `octagon.vert.wgsl`)
+3. Define the vertices of your shape in the shader:
+
+```wgsl
+@vertex
+fn main(
+    @builtin(vertex_index) VertexIndex: u32
+) -> @builtin(position) vec4<f32> {
+    // Define vertices for your shape
+    var pos = array<vec2<f32>, NUM_VERTICES>(
+        // Example vertices - replace with your shape's vertices
+        vec2( 0.0,  0.5),  // Top
+        vec2(-0.5, -0.5),  // Bottom left
+        vec2( 0.5, -0.5)   // Bottom right
+    );
+    
+    return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+}
+```
+
+### Step 2: Create the Initialization File
+
+1. Navigate to the `src/` folder
+2. Create a new file named `test-<shape>.ts` (e.g., `test-octagon.ts`)
+3. Add the following initialization code:
+
+```typescript
+import shapeVertWGSL from './shaders/<shape>.vert.wgsl';
+import fragWGSL from './shaders/red.frag.wgsl';
+
+export default function init(
+    context: GPUCanvasContext,
+    device: GPUDevice
+): void {
+    // Configure the presentation format
+    const presentationFormat = navigator.gpu.getPreferredCanvasFormat();
+    context.configure({
+        device,
+        format: presentationFormat,
+        alphaMode: 'opaque',
+    });
+
+    // Create the render pipeline
+    const pipeline = device.createRenderPipeline({
+        layout: 'auto',
+        vertex: {
+            module: device.createShaderModule({
+                code: shapeVertWGSL,
+            }),
+            entryPoint: 'main',
+        },
+        fragment: {
+            module: device.createShaderModule({
+                code: fragWGSL,
+            }),
+            entryPoint: 'main',
+            targets: [
+                {
+                    format: presentationFormat,
+                },
+            ],
+        },
+        primitive: {
+            topology: 'triangle-list', // Update if using a different topology
+        },
+    });
+
+    // Define the render frame function
+    function frame() {
+        const commandEncoder = device.createCommandEncoder();
+        const textureView = context.getCurrentTexture().createView();
+
+        const renderPassDescriptor: GPURenderPassDescriptor = {
+            colorAttachments: [
+                {
+                    view: textureView,
+                    clearValue: { r: 0.1, g: 0.3, b: 0.3, a: 1.0 },
+                    loadOp: 'clear',
+                    storeOp: 'store',
+                },
+            ],
+        };
+
+        const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
+        passEncoder.setPipeline(pipeline);
+        passEncoder.draw(NUM_VERTICES, 1, 0, 0); // Replace NUM_VERTICES with actual count
+        passEncoder.end();
+
+        device.queue.submit([commandEncoder.finish()]);
+        requestAnimationFrame(frame);
+    }
+
+    // Start the render loop
+    requestAnimationFrame(frame);
+}
+```
+
+### Step 3: Update the Shape Selector
+
+1. Open `index.html`
+2. Locate the shape selector element
+3. Add your new shape option:
+
+```html
+<select id="shape-selector" class="shape-selector">
+    <option value="triangle">Triangle</option>
+    <option value="square">Square</option>
+    <!-- Add your new shape here -->
+    <option value="octagon">Octagon</option>
+</select>
+```
+
+### Step 4: Register the Shape
+
+1. Open `main.ts`
+2. Import your new shape initialization function:
+
+```typescript
+import initOctagon from './test-octagon';
+```
+
+3. Add your shape to the shapes object:
+
+```typescript
+const shapes = {
+    triangle: initTriangle,
+    square: initSquare,
+    pentagon: initPentagon,
+    diamond: initDiamond,
+    hexagon: initHexagon,
+    octagon: initOctagon, // Add your shape here
+};
+```
+
+### Step 5: Testing
+
+1. Start the development server:
+```bash
+npm run dev
+```
+
+2. Open your browser to the local development URL
+3. Select your new shape from the dropdown menu
+4. Verify that it renders correctly
+
+---
+
+## File Structure Summary
+
+```plaintext
+src/
+├── shaders/
+│   ├── red.frag.wgsl
+│   └── <shape>.vert.wgsl    # Your vertex shader
+├── test-<shape>.ts          # Your shape initialization
+├── main.ts                  # Updated with your shape
+└── index.html              # Updated shape selector
+```
+
+## Common Issues and Solutions
+
+1. **Shape not appearing:**
+   - Verify vertex coordinates are within visible range (-1.0 to 1.0)
+   - Check `NUM_VERTICES` matches your vertex array length
+   - Ensure topology matches your vertex arrangement
+
+2. **Compilation errors:**
+   - Verify WGSL syntax in your vertex shader
+   - Check all imports are correctly pathed
+   - Ensure TypeScript types are properly defined
+
+3. **Performance issues:**
+   - Minimize vertex count when possible
+   - Use appropriate primitive topology
+   - Consider using indexed drawing for complex shapes
+
+---
+
+Remember to replace `<shape>` with your actual shape name in all file paths and code examples. This process ensures your new shape is fully integrated into the application's rendering pipeline.
