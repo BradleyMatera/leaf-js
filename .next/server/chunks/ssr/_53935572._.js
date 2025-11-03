@@ -1,3 +1,0 @@
-module.exports=[9270,(a,b,c)=>{"use strict";b.exports=a.r(42602).vendored.contexts.AppRouterContext},38783,(a,b,c)=>{"use strict";b.exports=a.r(42602).vendored["react-ssr"].ReactServerDOMTurbopackClient},63674,a=>{a.v("/leaf-js/_next/static/media/triangle.vert.1b8d0019.wgsl")},11909,a=>{a.v("/leaf-js/_next/static/media/red.frag.b6efafb0.wgsl")},54096,a=>{a.v("/leaf-js/_next/static/media/basic.vert.aa63694c.wgsl")},28114,a=>{a.v("/leaf-js/_next/static/media/vertexPositionColor.frag.c1d50fab.wgsl")},29140,a=>{a.v(b=>Promise.all(["server/chunks/ssr/node_modules_@nextui-org_dom-animation_dist_index_mjs_39087ff4._.js"].map(b=>a.l(b))).then(()=>b(43975)))}];
-
-//# sourceMappingURL=_53935572._.js.map

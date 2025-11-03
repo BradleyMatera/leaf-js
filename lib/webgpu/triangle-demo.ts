@@ -1,8 +1,7 @@
 import { createHelloTriangleDemo } from "./samples/hello-triangle/main";
-import { createTwoCubesDemo } from "./samples/two-cubes/main";
 import type { DemoInstance } from "./types";
 
-export type ShapeId = "hello-triangle" | "two-cubes";
+export type ShapeId = "hello-triangle";
 
 type ShapeMeta = {
   id: ShapeId;
@@ -23,16 +22,6 @@ export const availableShapes: ShapeMeta[] = [
     source: {
       title: "WebGPU Samples — Hello Triangle",
       url: "https://webgpu.github.io/webgpu-samples/?sample=helloTriangle"
-    }
-  },
-  {
-    id: "two-cubes",
-    label: "Two Cubes",
-    description:
-      "Dual rotating cubes adapted from the official Two Cubes sample. Showcases depth testing, uniform buffers, and animated transforms.",
-    source: {
-      title: "WebGPU Samples — Two Cubes",
-      url: "https://webgpu.github.io/webgpu-samples/?sample=twoCubes"
     }
   }
 ];
@@ -270,8 +259,6 @@ async function createDemoInstance(
   format: GPUTextureFormat
 ): Promise<DemoInstance> {
   switch (id) {
-    case "two-cubes":
-      return createTwoCubesDemo(device, format);
     case "hello-triangle":
     default:
       return createHelloTriangleDemo(device, format);
