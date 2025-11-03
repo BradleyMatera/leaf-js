@@ -54,3 +54,57 @@ https://react.dev/link/hydration-mismatch
         ...
       ...
 
+[00:03:17.382] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:17.566] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectErrorBoundary router={{...}}>
+      <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+        <SegmentViewNode type="page" pagePath="page.tsx">
+          <SegmentTrieNode>
+          <HomePage>
+            <div className="relative">
+              <div>
+              <TopNav>
+                <NextUI.Navbar maxWidth="lg" position="sticky" className="top-4 z-50...">
+                  <nav data-hidden={undefined} data-menu-open={undefined} ref={{current:null}} className="flex h-aut..." ...>
+                    <header data-menu-open={undefined} className="z-40 flex ...">
+                      <NextUI.NavbarBrand>
+                      <NextUI.NavbarContent>
+                      <NextUI.NavbarContent justify="end" className="items-cent...">
+                        <ul ref={{current:null}} className="flex h-ful..." data-justify="end">
+                          <ThemeToggle>
+                            <NextUI.Switch size="sm" color="default" isSelected={false} ...>
++                             <label
++                               onPointerEnter={function}
++                               onPointerLeave={function}
++                               aria-label="Toggle theme"
++                               ref={{current:null}}
++                               className="group relative max-w-fit inline-flex items-center justify-start cursor-poin..."
++                               data-disabled={undefined}
++                               data-selected={undefined}
++                               data-readonly={undefined}
++                               data-focus={undefined}
++                               data-focus-visible={undefined}
++                               data-hover={undefined}
++                               data-pressed={undefined}
++                             >
+-                             <div
+-                               className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white..."
+-                             >
+                          ...
+                    ...
+              ...
+        ...
+      ...
+
