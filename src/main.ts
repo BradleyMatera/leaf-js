@@ -24,5 +24,10 @@ import { assert } from './utils/util';
   });
   observer.observe(canvas);
   const context = canvas.getContext('webgpu') as GPUCanvasContext;  
+  
+  // Update title to indicate demo is ready
+  const h = document.querySelector('#title') as HTMLElement;
+  h.innerText = 'WebGPU Demo - Rotating Triangle';
+  
   init(context, device);  // Remove me!
 })();
