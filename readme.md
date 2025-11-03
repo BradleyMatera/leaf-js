@@ -1,11 +1,32 @@
 # leaf-js Demo
 
+A WebGPU TypeScript starter demonstrating basic 3D rendering with a simple triangle.
+
+🌐 **Live Demo:** [https://bradleymatera.github.io/leaf-js/](https://bradleymatera.github.io/leaf-js/)
+
 > **Disclaimer**  
 > This repository is a demo implementation. I am **not** the creator or owner of the original libraries or underlying codebase referenced here. The code present in this repository is solely a demonstration, created by following and replicating the intended functionality as defined by the source materials and existing libraries associated with `leaf-js`.
 
 ## Purpose
 
 This repository exists to showcase what the code and associated libraries are designed to do, as described in their documentation and source references. No original development or novel feature implementation has been performed here—this is strictly a demonstration for educational or illustrative purposes.
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Deployment
+
+The site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch. See [DEPLOY.md](DEPLOY.md) for more information.
 
 ## Attribution
 
